@@ -1,0 +1,26 @@
+version : "3"
+services:
+  dreamcup-mysql:
+    image: mysql:5.7.10
+    container_name: dreamcup-mysql
+    volumes:
+      - ./dbdata/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+
+  dreamcup-backend:
+    container_name: dreamcup-backend
+    image: dreamcup-backend
+    build: .
+    command: npm run watch:debug
+    volumes:
+      - .:/dreamcup
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    env_file:
+      - .env
+    links:
+      - milo-mysql

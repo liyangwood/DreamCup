@@ -1,0 +1,24 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "app/*": ["*"]
+    },
+    "module": "commonjs",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "lib": ["es5", "es6"],
+    "outDir": "./dist/",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowUnreachableCode": false,
+    "noUnusedLocals": false
+    //"traceResolution": true
+  },
+  "include": ["src/**/*"]
+}

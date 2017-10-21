@@ -1,0 +1,47 @@
+{
+  "name": "dreamcup-backend",
+  "version": "1.0.0",
+  "description": "dream cup backend",
+  "main": "dist/server.js",
+  "author": "liyangwood@gmail.com",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "mysql2": "^1.4.2",
+    "reflect-metadata": "^0.1.10",
+    "ts-node": "^3.3.0",
+    "typeorm": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1",
+    "prettier": "^1.7.4",
+    "tslint": "^5.7.0",
+    "tslint-config-airbnb": "5.3.0",
+    "tslint-config-prettier": "^1.5.0",
+    "typescript": "^2.5.3"
+  },
+  "scripts": {
+    "test": "mocha --timeout 50000 -r ts-node/register test/**/*.spec.ts",
+    "start": "npm run build && npm run watch",
+    "build": "npm run build:ts && npm run tslint",
+    "serve": "nodemon dist/server.js",
+    "generate:schema": "npm run build:ts && node dist/schema.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run serve\"",
+    "build:ts": "tsc",
+    "watch:ts": "tsc -w",
+    "run:db": "docker-compose -f docker-compose.db.yml up -d",
+    "tslint": "tslint -c tslint.json -p tsconfig.json -t codeFrame",
+    "tslint:test": "tslint -c tslint.json -p tsconfig_test.json -t codeFrame",
+    "precommit_bak": "lint-staged",
+    "debug": "npm run build && npm run watch:debug",
+    "serve:debug": "nodemon --inspect=0.0.0.0:9229 dist/server.js",
+    "watch:debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run serve:debug\""
+  },
+  "engines": {
+    "node": "^8.0.0"
+  }
+}
