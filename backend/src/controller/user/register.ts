@@ -10,13 +10,12 @@ export default class extends Base {
 			const user_service = new UserService(this.mysql, this.session);
 			const user = await user_service.registerNewUser(query);
 
-			Log.info('user register', user);
+			Log.info('/user/register', user);
 			this.json(1, {}, 'ok');
 		} catch(e){
 			Log.error(e);
 			this.json(-1, e.message);
 		}
-
 
 	}
 }

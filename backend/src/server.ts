@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { createConnections } from 'typeorm';
 import * as Koa from 'koa';
 import * as bodyParser from 'koa-bodyparser';
+import * as session from 'koa-session';
 
 import { mysql_config } from './config/db';
 import cors from './lib/third/cors';
@@ -16,9 +17,15 @@ createConnections([
 	.then(async connections => {
 		// create koa app
 		const app = new Koa();
+		app.keys = [process.env.SECRET||''];
 		// run app
 		app
 			.use(cors({}))
+			.use(session({
+				key : 'dream-cup:session',
+				maxAge : 1000*60*60*24*7,
+				rolling : true
+			}, app))
 			.use(bodyParser())
 			.use(router.routes())
 			.use(router.allowedMethods())

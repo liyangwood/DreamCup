@@ -3,7 +3,8 @@ import Router from '../models/Router';
 import { EntityManager, getManager } from 'typeorm';
 import * as _ from 'lodash';
 import {mysql_config} from '../config/db';
-import {Session, mockSession} from '../models/Session';
+import {Session} from '../models/Session';
+import {Log} from '../lib/utils';
 
 interface Routing {
 	path: string;
@@ -32,7 +33,7 @@ abstract class Base {
 	constructor(ctx) {
 		this.ctx = ctx;
 		this.mysql = getManager(mysql_config.name);
-		this.session = mockSession();
+		this.session = new Session(ctx.session);
 	}
 	async validate() {
 		return true;
@@ -43,15 +44,29 @@ abstract class Base {
 			if (!await this.validate()) {
 				return false;
 			}
+
+			await this.checkSession();
 			return await this.action();
 		} catch (e) {
-			console.log(e);
+			Log.error(e);
 			this.json(-1, e.message);
 		}
 	}
 
 	abstract async action(): Promise<any>;
 
+	public async checkSession(){
+		const user_id = this.session.get('user_id');
+		if(!user_id){
+			throw new Error('not login');
+		}
+
+		return user_id;
+	}
+
+	public async setUserIdToSession(user_id){
+		this.session.set('user_id', user_id);
+	}
 
 	/*
 	 * @param

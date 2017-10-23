@@ -23,4 +23,16 @@ export default class {
 		return await this.entityManager.save(doc);
 	}
 
+	public async findOne<T extends BaseEntity>(doc: T){
+		let rs;
+		if(doc.id){
+			rs = await this.entityManager.findOne(doc.getTableName(), doc.id);
+		}
+		else{
+			rs = await this.entityManager.findOne(doc.getTableName(), doc);
+		}
+
+		return <T>rs;
+	}
+
 }

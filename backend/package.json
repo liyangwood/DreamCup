@@ -5,6 +5,7 @@
   "main": "dist/server.js",
   "author": "liyangwood@gmail.com",
   "dependencies": {
+    "blueimp-md5": "^2.10.0",
     "dotenv": "^4.0.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
