@@ -2,6 +2,8 @@ import { Context } from 'koa';
 import Router from '../models/Router';
 import { EntityManager, getManager } from 'typeorm';
 import * as _ from 'lodash';
+import {mysql_config} from '../config/db';
+import {Session, mockSession} from '../models/Session';
 
 interface Routing {
 	path: string;
@@ -11,7 +13,9 @@ interface Routing {
 
 
 abstract class Base {
-	ctx: Context;
+	public ctx: Context;
+	public mysql: EntityManager;
+	public session: Session;
 
 	static setRouter(list: Routing[]): Router {
 		const router = new Router();
@@ -27,6 +31,8 @@ abstract class Base {
 
 	constructor(ctx) {
 		this.ctx = ctx;
+		this.mysql = getManager(mysql_config.name);
+		this.session = mockSession();
 	}
 	async validate() {
 		return true;
@@ -71,6 +77,16 @@ abstract class Base {
 	redirect(path: string) {
 		this.ctx.response.redirect(path);
 		return false;
+	}
+
+	// get user input
+	public getQuery(){
+		const method = this.ctx.request.method.toLowerCase();
+		if(method === 'get'){
+			return this.ctx.request.query;
+		}
+
+		return this.ctx.request.body;
 	}
 }
 

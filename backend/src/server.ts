@@ -3,14 +3,16 @@ import { createConnections } from 'typeorm';
 import * as Koa from 'koa';
 import * as bodyParser from 'koa-bodyparser';
 
-import { dbOptions } from './config/db';
+import { mysql_config } from './config/db';
 import cors from './lib/third/cors';
 import router from './controller';
 
 // create connection with database
 // note that its not active database connection
 // TypeORM creates you connection pull to uses connections from pull on your requests
-createConnections(dbOptions)
+createConnections([
+	mysql_config
+])
 	.then(async connections => {
 		// create koa app
 		const app = new Koa();
