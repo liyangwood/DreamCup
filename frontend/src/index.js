@@ -6,7 +6,7 @@ import config from 'app/config';
 const Root = ()=>{
 	return (
 		<div>
-			<b>{config.SERVER_URL}</b>
+			<b>{config.SERVER_URL} lsdjkf</b>
 		</div>
 	);
 };

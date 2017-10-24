@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "react+webpack+es6",
   "scripts": {
-    "start": "rimraf dev && BABEL_ENV=development NODE_ENV=development webpack --config ./webpack/webpack.dev.js --progress --watch",
+    "start": "npm run docker:start && rimraf dev && npm run build:dev_watch",
+
+    "build:dev": "BABEL_ENV=development NODE_ENV=development webpack --config ./webpack/webpack.dev.js",
+    "build:dev_watch": "BABEL_ENV=development NODE_ENV=development webpack --config ./webpack/webpack.dev.js --progress --watch",
+    "docker:start": "docker-compose up -d",
+
     "clean": "rimraf dist",
     "build": "npm run clean && BABEL_ENV=production NODE_ENV=production webpack --config ./webpack/webpack.prod.js --progress",
     "lint": "eslint ./src/**/**.js",

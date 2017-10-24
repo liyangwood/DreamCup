@@ -1,10 +1,11 @@
 version: '3'
 services:
   proxy:
+    container_name: frontend
     image: nginx:alpine
     ports:
       - 80:80
 
     volumes:
       - ./proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
-      - ./dev:/www:ro
+      - ./:/www
