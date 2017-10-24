@@ -1,0 +1,48 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react-native",
+    "react"
+  ],
+  "ecmaFeatures": {
+    "jsx": true,
+    "destructuring": true,
+    "arrowFunctions": true,
+    "classes": true,
+    "objectLiteralShorthandMethods": true,
+    "spread": true
+  },
+  "rules": {
+    "no-fallthrough": 1,
+    "strict": 2,
+    "no-unreachable": 2,
+    "semi": 2,
+    "curly": 0,
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 0,
+    "react-native/no-color-literals": 0,
+    "react/prefer-stateless-function": 0,
+    "react/no-unused-prop-types": 2,
+    "react/no-direct-mutation-state": 2,
+    "react/no-is-mounted": 2,
+    "react/no-render-return-value": 2,
+    "react/jsx-no-undef": 2,
+    "react/no-deprecated": 2,
+    "react/display-name": 0,
+    "react/prop-types": 1,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "no-var": 2,
+    "prefer-const": 2,
+    "no-const-assign": 2,
+    "no-unused-labels": 2,
+    "no-unused-vars": 1
+  },
+  "env": {
+    "node": true
+  },
+  "globals": {
+    "fetch": true
+  }
+}
