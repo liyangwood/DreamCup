@@ -15,8 +15,8 @@
   },
   "rules": {
     "space-before-function-paren": "off",
-    "react/prefer-stateless-function": "warn",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": "off",
+    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
     "linebreak-style": "off",
     "global-require": "off",
     "semi": "warn",

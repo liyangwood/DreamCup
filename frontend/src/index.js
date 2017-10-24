@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import config from 'app/config';
+
 const Root = ()=>{
 	return (
 		<div>
-			<div>Templat1e value</div>
+			<b>{config.SERVER_URL} lsdjkf</b>
 		</div>
 	);
 };
+
+console.log(1111);
 
 const render = (Component) => {
 	ReactDOM.render(

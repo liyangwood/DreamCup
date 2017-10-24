@@ -2,7 +2,7 @@ version : "3"
 services:
   dreamcup-mysql:
     image: mysql:5.7.10
-    container_name: dreamcup-mysql
+    container_name: mysql
     volumes:
       - ./dbdata/mysql:/var/lib/mysql
     ports:
@@ -11,7 +11,7 @@ services:
       - .env
 
   dreamcup-backend:
-    container_name: dreamcup-backend
+    container_name: backend
     image: dreamcup-backend
     build: .
     command: npm run watch:debug
